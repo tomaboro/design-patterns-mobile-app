@@ -18,8 +18,10 @@
             android:title="@string/pref_sub_beacons_add"
             android:key="stg" />
 
-        <ListPreference
-            android:title="@string/pref_sub_beacons_remove"/>
+        <pl.edu.agh.designpatterns.alexabeaconapp.CustomPreferenceDialogs.RemoveBeaconAreaPreference
+            android:title="@string/pref_sub_beacons_remove"
+            android:key="stg" />
+
     </PreferenceCategory>
 
     <PreferenceCategory
