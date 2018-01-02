@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+    <PreferenceCategory
+        android:title="@string/pref_title_alexa"
+        android:key="pref_key_storage_settings">
+        <EditTextPreference
+            android:title="@string/pref_sub_alexa_session" />
+        <EditTextPreference
+            android:title="@string/pref_sub_alexa_username" />
+        <EditTextPreference
+            android:title="@string/pref_sub_alexa_password" />
+    </PreferenceCategory>
+    <PreferenceCategory
+        android:title="@string/pref_title_beacons"
+        android:key="pref_key_storage_settings">
+
+        <pl.edu.agh.designpatterns.alexabeaconapp.CustomPreferenceDialogs.AddBeaconAreaPreference
+            android:title="@string/pref_sub_beacons_add"
+            android:key="stg" />
+
+        <ListPreference
+            android:title="@string/pref_sub_beacons_remove"/>
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        android:title="@string/pref_title_others"
+        android:key="pref_key_storage_settings">
+
+
+    </PreferenceCategory>
+
+</PreferenceScreen>
