@@ -15,12 +15,22 @@
         >
 
         <ImageView
+            android:id="@+id/area_image_iv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/area_image_iv"
             android:layout_alignParentLeft="true"
             android:layout_alignParentTop="true"
             android:layout_marginRight="16dp"
+            android:background="@color/colorAccent"
+            card_view:srcCompat="@android:drawable/star_big_on" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/area_name_tv"
+            android:layout_toRightOf="@+id/area_image_iv"
+            android:layout_alignParentTop="true"
+            android:textSize="30sp"
             />
 
         <TextView
@@ -28,9 +38,9 @@
             android:layout_height="wrap_content"
             android:id="@+id/area_tag_tv"
             android:layout_toRightOf="@+id/area_image_iv"
-            android:layout_alignParentTop="true"
-            android:textSize="30sp"
+            android:layout_below="@+id/area_name_tv"
             />
+
 
         <TextView
             android:layout_width="wrap_content"
@@ -44,7 +54,9 @@
             android:id="@+id/button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
+            android:layout_alignBaseline="@+id/area_tag_tv"
+            android:layout_alignBottom="@+id/area_tag_tv"
+            android:layout_alignParentEnd="true"
             android:text="Edit" />
 
         <Button

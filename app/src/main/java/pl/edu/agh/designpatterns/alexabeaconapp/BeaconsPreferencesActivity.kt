@@ -5,6 +5,7 @@ import android.app.DialogFragment
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.os.Bundle
+import android.support.v7.app.AppCompatActivity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,6 +13,7 @@ import android.widget.ImageView
 import kotlinx.android.synthetic.main.activity_beaconspreferences.*
 import android.widget.TextView
 import android.widget.Toast
+import kotlinx.android.synthetic.main.dialog_editbeaconarea.view.*
 import kotlinx.android.synthetic.main.elem_beaconarea.view.*
 
 
@@ -34,7 +36,7 @@ class MyAdapter(var beaconAreas : MutableList<BeaconArea>,var recyclerView: Recy
         val beaconArea = beaconAreas.get(position)
         holder!!.areaTagTV.text = beaconArea.tag
         holder.areaRadiusTV.text = beaconArea.radius.toString()
-        holder.areaImgIV.setImageResource(beaconArea.image)
+        holder.areaNameTV.text = beaconArea.name
 
         holder.editButton.setOnClickListener {
             myAdapterButtonsListner.editButtonOnClick(position)
@@ -55,35 +57,43 @@ class MyAdapter(var beaconAreas : MutableList<BeaconArea>,var recyclerView: Recy
     class MyViewHolder(v:View) : RecyclerView.ViewHolder(v) {
         val areaTagTV = v.area_tag_tv
         val areaRadiusTV = v.area_radius_tv
-        val areaImgIV = v.area_image_iv
+        val areaNameTV = v.area_name_tv
         val editButton = v.button
         val deleteButton = v.button2
     }
 }
 
-class BeaconsPreferencesActivity : Activity(), EditBeaconAreaDialog.NoticeDialogListener, MyAdapter.MyAdapterButtonsListner {
+class BeaconsPreferencesActivity : AppCompatActivity(), EditBeaconAreaDialog.NoticeDialogListener, MyAdapter.MyAdapterButtonsListner {
+    var tmp : sharedPreferancesAdapter? = null
+
     override fun editButtonOnClick(poition: Int) {
         val elem = areasList.get(poition)
         val newFragment = EditBeaconAreaDialog()
         newFragment.areaTag = elem.tag
         newFragment.areaRadius = elem.radius
-        newFragment.areaImage = elem.image
         newFragment.elemIndex = poition
+        newFragment.areaName = elem.name
         newFragment.show(this@BeaconsPreferencesActivity.fragmentManager,"sth345")
     }
 
     override fun deleteButtonOnClick(poition: Int) {
         areasList.removeAt(poition)
+        tmp!!.removeBeaconArea(poition)
         mAdapter!!.notifyDataSetChanged()
     }
 
     var areasList = mutableListOf<BeaconArea>()
 
     override fun onDialogPositiveClick(editBeaconAreaDialog: EditBeaconAreaDialog) {
-        if(editBeaconAreaDialog.elemIndex < 0) areasList.add(BeaconArea(editBeaconAreaDialog.areaTag!!, editBeaconAreaDialog.areaRadius!!, editBeaconAreaDialog.areaImage!!))
+        if(editBeaconAreaDialog.elemIndex < 0) {
+            areasList.add(BeaconArea(editBeaconAreaDialog.areaName!!, editBeaconAreaDialog.areaTag!!, editBeaconAreaDialog.areaRadius!!))
+            tmp!!.persistBeaconArea(BeaconArea(editBeaconAreaDialog.areaName!!, editBeaconAreaDialog.areaTag!!, editBeaconAreaDialog.areaRadius!!))
+        }
         else {
             areasList.removeAt(editBeaconAreaDialog.elemIndex)
-            areasList.add(editBeaconAreaDialog.elemIndex,BeaconArea(editBeaconAreaDialog.areaTag!!, editBeaconAreaDialog.areaRadius!!, editBeaconAreaDialog.areaImage!!))
+            tmp!!.removeBeaconArea(editBeaconAreaDialog.elemIndex)
+            areasList.add(editBeaconAreaDialog.elemIndex,BeaconArea(editBeaconAreaDialog.areaName!!, editBeaconAreaDialog.areaTag!!, editBeaconAreaDialog.areaRadius!!))
+            tmp!!.persistBeaconArea(BeaconArea(editBeaconAreaDialog.areaName!!, editBeaconAreaDialog.areaTag!!, editBeaconAreaDialog.areaRadius!!))
             mAdapter!!.notifyDataSetChanged()
         }
     }
@@ -98,14 +108,8 @@ class BeaconsPreferencesActivity : Activity(), EditBeaconAreaDialog.NoticeDialog
         mRecyclerView = beaconslist_rv
         mLayoutManager = LinearLayoutManager(this)
         mRecyclerView!!.layoutManager = mLayoutManager
-
-        val tmpList = mutableListOf<BeaconArea>()
-        tmpList.add(BeaconArea("desk",5.0,R.drawable.ic_launcher_foreground))
-        tmpList.add(BeaconArea("chair",2.0,R.drawable.ic_launcher_foreground))
-        tmpList.add(BeaconArea("desk",9.0,R.drawable.ic_launcher_foreground))
-        tmpList.add(BeaconArea("chair",4.0,R.drawable.ic_launcher_foreground))
-        tmpList.add(BeaconArea("desk",99.0,R.drawable.ic_launcher_foreground))
-        tmpList.add(BeaconArea("chair",3.0,R.drawable.ic_launcher_foreground))
+        tmp = sharedPreferancesAdapter(this.applicationContext)
+        val tmpList = tmp!!.getBeaconAreas()
 
         areasList = tmpList
         mAdapter = MyAdapter(areasList, mRecyclerView!!, this)

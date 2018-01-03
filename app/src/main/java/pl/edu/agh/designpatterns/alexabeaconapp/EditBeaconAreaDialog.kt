@@ -19,9 +19,9 @@ import kotlinx.android.synthetic.main.dialog_editbeaconarea.view.*
  */
 
 class EditBeaconAreaDialog() : DialogFragment() {
+    var areaName: String? = null
     var areaTag: String? = null
     var areaRadius: Double? = null
-    var areaImage: Int? = null
     var elemIndex: Int = -1
 
     interface NoticeDialogListener {
@@ -47,21 +47,18 @@ class EditBeaconAreaDialog() : DialogFragment() {
         if(elemIndex >= 0) {
             dialogView.eba_area_tag_et.setText(areaTag)
             dialogView.eba_area_radius_et.setText(areaRadius.toString())
+            dialogView.eba_area_name_et.setText(areaName)
         }
 
         builder.setView(dialogView)
                 .setPositiveButton(android.R.string.ok, DialogInterface.OnClickListener { dialog, id ->
                     areaTag = dialogView.eba_area_tag_et.text.toString()
                     areaRadius = dialogView.eba_area_radius_et.text.toString().toDouble()
-                    areaImage = R.drawable.ic_launcher_foreground
+                    areaName = dialogView.eba_area_name_et.text.toString()
                     mListener!!.onDialogPositiveClick(this)
                 })
                 .setNegativeButton(android.R.string.cancel, DialogInterface.OnClickListener { dialog, id ->
                     dialog.cancel() })
         return builder.create()
-    }
-
-    fun collectData(): BeaconArea {
-        return BeaconArea(eba_area_tag_et.text.toString(),eba_area_radius_et.text.toString().toDouble(), R.drawable.ic_launcher_foreground)
     }
 }

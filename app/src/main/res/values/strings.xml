@@ -20,6 +20,10 @@
     <!-- AddBeaconAreaFragment -->
     <string name="dialog_eba_area_tag">Area tag</string>
     <string name="dialog_eba_area_radius">Area radius</string>
+    <string name="dialog_eba_area_name">Area name</string>
     <string name="title_activity_main">MainActivity</string>
+
+    <!-- Errors -->
+    <string name="reading_preferances_error">Something went wrong while reading preferences from memory.</string>
 
 </resources>
