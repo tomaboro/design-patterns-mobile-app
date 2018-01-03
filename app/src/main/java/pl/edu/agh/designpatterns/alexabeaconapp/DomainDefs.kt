@@ -9,7 +9,7 @@ import com.google.gson.reflect.TypeToken
  * Created by motek on 02.01.18.
  */
 
-data class BeaconArea(val tag: String, val radius: Double)
+data class BeaconArea(val tag: String, val radius: Double, val image: Int)
 
 
 fun DialogPreference.getBeaconAreas() : MutableList<BeaconArea> {
@@ -32,8 +32,6 @@ fun DialogPreference.removeBeaconArea(position: Int) {
 
 fun DialogPreference.persistBeaconArea(beaconArea: BeaconArea) {
     var areasList = getBeaconAreas()
-
-    if(areasList == null) areasList = mutableListOf<BeaconArea>()
 
     areasList.add(beaconArea)
 

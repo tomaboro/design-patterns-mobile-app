@@ -4,12 +4,12 @@
 
 
     <!-- Preferences -->
-    <string name="pref_title_alexa">Alexa Settings</string>
+    <string name="pref_title_alexa">Alexa</string>
     <string name="pref_sub_alexa_session">Session id</string>
     <string name="pref_sub_alexa_password">Session password</string>
     <string name="pref_sub_alexa_username">Username</string>
-    <string name="pref_title_beacons">Beacons Settings</string>
-    <string name="pref_sub_beacons_add">Add areas</string>
+    <string name="pref_title_beacons">Beacons</string>
+    <string name="pref_sub_beacons_add">Manage beacons</string>
     <string name="pref_sub_beacons_remove">Remove areas</string>
     <string name="pref_title_others">Other Settings</string>
     <string name="pref_sub_others_frequency">Refresh frequency</string>
@@ -18,8 +18,8 @@
     <string name="pref_key_beacons_areas">areas_list</string>
 
     <!-- AddBeaconAreaFragment -->
-    <string name="dialog_aba_area_tag">Area tag</string>
-    <string name="dialog_aba_area_radius">Area radius</string>
+    <string name="dialog_eba_area_tag">Area tag</string>
+    <string name="dialog_eba_area_radius">Area radius</string>
     <string name="title_activity_main">MainActivity</string>
 
 </resources>

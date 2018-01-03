@@ -24,6 +24,15 @@
             android:label="Settings">
 
         </activity>
+
+        <activity
+            android:name=".BeaconsPreferencesActivity"
+            android:label="Beacons">
+            <intent-filter>
+                <action android:name="pl.edu.agh.designpatterns.alexabeaconapp.activities.ManageBeacons" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
     </application>
 
 </manifest>

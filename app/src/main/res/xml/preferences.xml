@@ -14,21 +14,18 @@
         android:title="@string/pref_title_beacons"
         android:key="pref_key_storage_settings">
 
-        <pl.edu.agh.designpatterns.alexabeaconapp.CustomPreferenceDialogs.AddBeaconAreaPreference
-            android:title="@string/pref_sub_beacons_add"
-            android:key="stg" />
-
-        <pl.edu.agh.designpatterns.alexabeaconapp.CustomPreferenceDialogs.RemoveBeaconAreaPreference
-            android:title="@string/pref_sub_beacons_remove"
-            android:key="stg" />
+        <PreferenceScreen
+            android:title="@string/pref_sub_beacons_add">
+            <intent android:action="pl.edu.agh.designpatterns.alexabeaconapp.activities.ManageBeacons"/>
+        </PreferenceScreen>
 
     </PreferenceCategory>
 
     <PreferenceCategory
         android:title="@string/pref_title_others"
         android:key="pref_key_storage_settings">
-
-
+        <EditTextPreference
+            android:title="@string/pref_sub_others_frequency" />
     </PreferenceCategory>
 
 </PreferenceScreen>
