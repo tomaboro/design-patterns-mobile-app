@@ -5,8 +5,15 @@ import android.content.Intent
 import android.os.Bundle
 import android.support.design.widget.Snackbar
 import android.support.v7.app.AppCompatActivity
+import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
+import com.estimote.cloud_plugin.common.EstimoteCloudCredentials
+import com.estimote.proximity_sdk.proximity.ProximityObserverBuilder
+import com.estimote.mustard.rx_goodness.rx_requirements_wizard.Requirement
+import com.estimote.mustard.rx_goodness.rx_requirements_wizard.RequirementsWizardFactory
+import com.estimote.proximity_sdk.proximity.ProximityObserver
+import com.estimote.proximity_sdk.proximity.ProximityZone
 
 import kotlinx.android.synthetic.main.activity_main.*
 
@@ -16,6 +23,21 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         setSupportActionBar(toolbar)
+
+        val bm = BeaconManager(this)
+
+        bm.refreshAreas()
+
+        RequirementsWizardFactory.createEstimoteRequirementsWizard().fulfillRequirements(
+                this,
+                onRequirementsFulfilled = {
+                    bm.startScanning()
+                },
+                onRequirementsMissing =  { Log.i("DEBUG","miss")},
+                onError = { Log.i("DEBUG","err")}
+        )
+
+        bm.startScanning()
 
         fab.setOnClickListener { view ->
             Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)

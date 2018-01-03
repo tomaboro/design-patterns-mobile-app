@@ -22,7 +22,7 @@ class sharedPreferancesAdapter(val context: Context) {
         return try {
             val ret = Gson().fromJson<MutableList<BeaconArea>>(areasListJSON, beaconAreasListType)
             ret
-        }catch (e: IllegalStateException) {
+        }catch (e: Exception) {
             Toast.makeText(context,context.resources.getText(R.string.reading_preferances_error),Toast.LENGTH_SHORT).show()
             mutableListOf<BeaconArea>()
         }

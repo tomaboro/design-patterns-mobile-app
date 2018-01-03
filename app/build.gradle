@@ -32,4 +32,8 @@ dependencies {
     implementation 'com.android.support:design:26.1.0'
     compile 'com.android.support:recyclerview-v7:26.1.0'
     compile 'com.android.support:cardview-v7:26.1.0'
+    // Our Proximity SDK
+    compile 'com.estimote:proximity-sdk:0.1.0-alpha.6'
+    // Our support library with Android UI handy components. We will use EstimoteRequirementsWizard from there.
+    compile 'com.estimote:mustard:0.1.0'
 }
