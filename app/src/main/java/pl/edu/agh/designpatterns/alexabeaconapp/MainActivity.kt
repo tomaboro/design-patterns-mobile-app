@@ -8,6 +8,9 @@ import android.support.v7.app.AppCompatActivity
 import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
+import com.android.volley.Request
+import com.android.volley.RequestQueue
+import com.android.volley.Response
 import com.estimote.cloud_plugin.common.EstimoteCloudCredentials
 import com.estimote.proximity_sdk.proximity.ProximityObserverBuilder
 import com.estimote.mustard.rx_goodness.rx_requirements_wizard.Requirement
@@ -16,6 +19,11 @@ import com.estimote.proximity_sdk.proximity.ProximityObserver
 import com.estimote.proximity_sdk.proximity.ProximityZone
 
 import kotlinx.android.synthetic.main.activity_main.*
+import com.android.volley.VolleyError
+import retrofit2.http.GET
+import com.android.volley.toolbox.StringRequest
+
+
 
 class MainActivity : AppCompatActivity() {
 
@@ -40,8 +48,23 @@ class MainActivity : AppCompatActivity() {
         bm.startScanning()
 
         fab.setOnClickListener { view ->
-            Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                    .setAction("Action", null).show()
+            ConnectionSingleton.getInstance(this).requestQueue
+
+            val url = "https://requestb.in/qqg414qq"
+
+            val stringRequest = StringRequest(Request.Method.GET, url,
+                    object : Response.Listener<String> {
+                        override fun onResponse(response: String) {
+                            Log.d("Connection","Success")
+                        }
+                    },
+                    object : Response.ErrorListener {
+                        override fun onErrorResponse(error: VolleyError) {
+                            Log.d("Connection","Error")
+                        }
+                    })
+
+            ConnectionSingleton.getInstance(this).addToRequestQueue(stringRequest)
         }
     }
 

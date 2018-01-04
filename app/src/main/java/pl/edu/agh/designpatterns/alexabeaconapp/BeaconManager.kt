@@ -4,6 +4,7 @@ import android.app.Notification
 import android.content.Context
 import android.util.DebugUtils
 import android.util.Log
+import android.widget.Toast
 import com.estimote.cloud_plugin.common.EstimoteCloudCredentials
 import com.estimote.proximity_sdk.proximity.ProximityObserver
 import com.estimote.proximity_sdk.proximity.ProximityObserverBuilder
@@ -37,37 +38,29 @@ class BeaconManager(val context: Context) {
         sharedPreferencesAdapter.getBeaconAreas().forEach { beaconArea ->
             areasList.add(
                     proximityObserver.zoneBuilder()
-                    .forAttachmentKeyAndValue("venue", beaconArea.name)
+                    .forAttachmentKeyAndValue("area", beaconArea.tag)
                     .inCustomRange(beaconArea.radius)
-                    .create())
+                            .withOnEnterAction {Log.d("beacon","enter: " + beaconArea.name) }
+                            .withOnExitAction { Log.d("beacon","exit: " + beaconArea.name) }
+                    .create()
+            )
         }
     }
 
     fun startScanning() {
-        val venueZone = proximityObserver.zoneBuilder()
-                .forAttachmentKeyAndValue("venue", "office")
-                .inCustomRange(5.0)
-                .create()
 
-        // The next zone is defined for a single desk in your venue - let's call it "Mint desk".
         val mintDeskZone = proximityObserver.zoneBuilder()
                 .forAttachmentKeyAndValue("desk", "mint")
                 .inNearRange()
                 .create()
 
-        // The last zone is defined for another single desk in your venue - the "Blueberry desk".
-        val blueberryDeskZone = proximityObserver.zoneBuilder()
-                .forAttachmentKeyAndValue("desk", "blueberry")
-                .inNearRange()
-                .create()
-
-        Log.d("DEBUG",areasList.toString())
-
-        areasList.add(venueZone)
+        areasList.add(mintDeskZone)
 
         observationHandler = proximityObserver
                 .addProximityZones(areasList.toList())
                 .start()
+
+        Log.d("2123","asdasdads")
     }
 
     fun stopScanning() {
