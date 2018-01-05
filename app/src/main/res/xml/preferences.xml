@@ -1,31 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+
     <PreferenceCategory
-        android:title="@string/pref_title_alexa"
-        android:key="pref_key_storage_settings">
+        android:title="@string/pref_title_alexa">
         <EditTextPreference
-            android:title="@string/pref_sub_alexa_session" />
+            android:title="@string/pref_sub_alexa_session"
+            android:key="@string/pref_key_alexa_session"
+            android:defaultValue=" "/>
         <EditTextPreference
-            android:title="@string/pref_sub_alexa_username" />
+            android:title="@string/pref_sub_alexa_username"
+            android:key="@string/pref_key_alexa_username"
+            android:defaultValue=" "/>
         <EditTextPreference
-            android:title="@string/pref_sub_alexa_password" />
+            android:title="@string/pref_sub_alexa_password"
+            android:key="@string/pref_key_alexa_password"
+            android:defaultValue=" "/>
     </PreferenceCategory>
+
     <PreferenceCategory
-        android:title="@string/pref_title_beacons"
-        android:key="pref_key_storage_settings">
+        android:title="@string/pref_title_beacons">
+
+        <EditTextPreference
+            android:title="@string/pref_sub_beacons_app_id"
+            android:key="@string/pref_key_estimote_app_id"
+            android:defaultValue="design-patterns-app-7am" />
+
+        <EditTextPreference
+            android:title="@string/pref_sub_beacons_app_token"
+            android:key="@string/pref_key_estimote_token"
+            android:defaultValue="2cc603a3c8ffa027140a576f4de11d56" />
 
         <PreferenceScreen
-            android:title="@string/pref_sub_beacons_add">
+            android:title="@string/pref_sub_beacons_manage_beacons">
             <intent android:action="pl.edu.agh.designpatterns.alexabeaconapp.activities.ManageBeacons"/>
         </PreferenceScreen>
-
-    </PreferenceCategory>
-
-    <PreferenceCategory
-        android:title="@string/pref_title_others"
-        android:key="pref_key_storage_settings">
-        <EditTextPreference
-            android:title="@string/pref_sub_others_frequency" />
     </PreferenceCategory>
 
 </PreferenceScreen>

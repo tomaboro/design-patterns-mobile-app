@@ -45,8 +45,6 @@ class MainActivity : AppCompatActivity() {
                 onError = { Log.i("DEBUG","err")}
         )
 
-        bm.startScanning()
-
         fab.setOnClickListener { view ->
             ConnectionSingleton.getInstance(this).requestQueue
 

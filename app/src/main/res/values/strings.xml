@@ -2,19 +2,22 @@
     <string name="app_name">AlexaBeaconApp</string>
     <string name="action_settings">Settings</string>
 
-
     <!-- Preferences -->
     <string name="pref_title_alexa">Alexa</string>
     <string name="pref_sub_alexa_session">Session id</string>
     <string name="pref_sub_alexa_password">Session password</string>
     <string name="pref_sub_alexa_username">Username</string>
     <string name="pref_title_beacons">Beacons</string>
-    <string name="pref_sub_beacons_add">Manage beacons</string>
-    <string name="pref_sub_beacons_remove">Remove areas</string>
-    <string name="pref_title_others">Other Settings</string>
-    <string name="pref_sub_others_frequency">Refresh frequency</string>
+    <string name="pref_sub_beacons_app_id">App id</string>
+    <string name="pref_sub_beacons_app_token">App token</string>
+    <string name="pref_sub_beacons_manage_beacons">Manage beacons</string>
 
     <!-- Preferences keys -->
+    <string name="pref_key_alexa_session">alexa_session_id</string>
+    <string name="pref_key_alexa_username">alexa_username</string>
+    <string name="pref_key_alexa_password">alexa_password</string>
+    <string name="pref_key_estimote_app_id">estimote_app_id</string>
+    <string name="pref_key_estimote_token">token</string>
     <string name="pref_key_beacons_areas">areas_list</string>
 
     <!-- AddBeaconAreaFragment -->
@@ -22,6 +25,10 @@
     <string name="dialog_eba_area_radius">Area radius</string>
     <string name="dialog_eba_area_name">Area name</string>
     <string name="title_activity_main">MainActivity</string>
+
+    <!-- BeaconAreaElem -->
+    <string name="elembeaconarea_tag">Tag: </string>
+    <string name="elembeaconarea_radius">Radius: </string>
 
     <!-- Errors -->
     <string name="reading_preferances_error">Something went wrong while reading preferences from memory.</string>

@@ -36,31 +36,30 @@ class BeaconManager(val context: Context) {
         areasList.clear()
 
         sharedPreferencesAdapter.getBeaconAreas().forEach { beaconArea ->
-            areasList.add(
-                    proximityObserver.zoneBuilder()
-                    .forAttachmentKeyAndValue("area", beaconArea.tag)
+            val nxtZone = proximityObserver.zoneBuilder()
+                    .forAttachmentKeyAndValue("venuess", beaconArea.tag)
                     .inCustomRange(beaconArea.radius)
-                            .withOnEnterAction {Log.d("beacon","enter: " + beaconArea.name) }
-                            .withOnExitAction { Log.d("beacon","exit: " + beaconArea.name) }
+                    .withOnEnterAction {Log.d("beacon","enter: " + beaconArea.name) }
+                    .withOnExitAction { Log.d("beacon","exit: " + beaconArea.name) }
                     .create()
-            )
+
+            areasList.add(nxtZone)
+
         }
     }
 
     fun startScanning() {
 
-        val mintDeskZone = proximityObserver.zoneBuilder()
-                .forAttachmentKeyAndValue("desk", "mint")
-                .inNearRange()
-                .create()
+        refreshAreas()
 
-        areasList.add(mintDeskZone)
+        areasList.forEach{ nxtZone ->
+            Log.d("Tag",nxtZone.attachmentKey + ", " + nxtZone.attachmentValue + ", " + nxtZone.desiredMeanTriggerDistance)
+        }
 
         observationHandler = proximityObserver
                 .addProximityZones(areasList.toList())
                 .start()
 
-        Log.d("2123","asdasdads")
     }
 
     fun stopScanning() {
