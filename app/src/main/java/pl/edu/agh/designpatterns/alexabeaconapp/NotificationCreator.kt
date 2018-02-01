@@ -17,7 +17,7 @@ class NotificationCreator {
     private val CHANNEL_ID = "ESTIMOTE_SCAN"
     private val CHANNEL_NAME = "Estimote bluetooth scan notifications"
     private val CHANNEL_DESCRIPTION = "Blah blah blah"
-    private val NOTIFICATION_TITLE = "Estimote Inc. \u00AE"
+    private val NOTIFICATION_TITLE = "Design Patterns mobile app \u00AE"
     private val NOTIFICATION_TEXT = "Scan is running..."
 
     fun create(context: Context): Notification =

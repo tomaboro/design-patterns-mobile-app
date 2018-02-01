@@ -11,6 +11,8 @@
     <string name="pref_sub_beacons_app_id">App id</string>
     <string name="pref_sub_beacons_app_token">App token</string>
     <string name="pref_sub_beacons_manage_beacons">Manage beacons</string>
+    <string name="pref_title_others">Others</string>
+    <string name="pref_sub_others_url">Server URL</string>
 
     <!-- Preferences keys -->
     <string name="pref_key_alexa_session">alexa_session_id</string>
@@ -19,12 +21,20 @@
     <string name="pref_key_estimote_app_id">estimote_app_id</string>
     <string name="pref_key_estimote_token">token</string>
     <string name="pref_key_beacons_areas">areas_list</string>
+    <string name="pref_key_others_server_url">server_url</string>
 
     <!-- AddBeaconAreaFragment -->
     <string name="dialog_eba_area_tag">Area tag</string>
     <string name="dialog_eba_area_radius">Area radius</string>
     <string name="dialog_eba_area_name">Area name</string>
     <string name="title_activity_main">MainActivity</string>
+
+    <!-- AddRuleFragment -->
+    <string name="dialog_ar_question">Question</string>
+    <string name="dialog_ar_answer">Answer</string>
+    <string name="dialog_ar_beacons">Beacon</string>
+    <string name="dialog_ar_set_beacon">Set Beacon</string>
+
 
     <!-- BeaconAreaElem -->
     <string name="elembeaconarea_tag">Tag: </string>

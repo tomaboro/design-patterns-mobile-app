@@ -53,7 +53,6 @@ class MyAdapter(var beaconAreas : MutableList<BeaconArea>,var recyclerView: Recy
         return MyViewHolder(view)
     }
 
-
     class MyViewHolder(v:View) : RecyclerView.ViewHolder(v) {
         val areaTagTV = v.area_tag_tv
         val areaRadiusTV = v.area_radius_tv

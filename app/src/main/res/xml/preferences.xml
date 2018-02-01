@@ -36,4 +36,13 @@
         </PreferenceScreen>
     </PreferenceCategory>
 
+    <PreferenceCategory
+        android:title="@string/pref_title_others">
+
+        <EditTextPreference
+            android:title="@string/pref_sub_others_url"
+            android:key = "@string/pref_key_others_server_url"
+            android:defaultValue="https://2318e87e.ngrok.io" />
+    </PreferenceCategory>
+
 </PreferenceScreen>

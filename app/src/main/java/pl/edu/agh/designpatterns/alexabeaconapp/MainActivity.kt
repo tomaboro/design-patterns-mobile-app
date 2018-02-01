@@ -20,12 +20,31 @@ import com.estimote.proximity_sdk.proximity.ProximityZone
 
 import kotlinx.android.synthetic.main.activity_main.*
 import com.android.volley.VolleyError
+import com.android.volley.toolbox.JsonObjectRequest
 import retrofit2.http.GET
 import com.android.volley.toolbox.StringRequest
+import org.json.JSONObject
 
 
+class MainActivity : AppCompatActivity(), AddRuleDialog.NoticeDialogListener {
+    override fun onDialogPositiveClick(addRuleDialog: AddRuleDialog) {
+        val url = getSharedPreferences("To DO",Context.MODE_PRIVATE).getString(getString(R.string.pref_key_others_server_url),"https://2318e87e.ngrok.io") + "/question"
+        val jsonBody = JSONObject("{\"question\":\"" + addRuleDialog.question + "\",\"answer\":\"" + addRuleDialog.response + "\",\"beaconID\":\"" + addRuleDialog.beacon + " \"}")
 
-class MainActivity : AppCompatActivity() {
+        val stringRequest = JsonObjectRequest(Request.Method.PUT, url, jsonBody,
+                object : Response.Listener<JSONObject> {
+                    override fun onResponse(response: JSONObject?) {
+                        Log.d("Connection","Success")
+                    }
+                },
+                object : Response.ErrorListener {
+                    override fun onErrorResponse(error: VolleyError) {
+                        Log.d("Connection","Error")
+                    }
+                })
+
+        ConnectionSingleton.getInstance(this).addToRequestQueue(stringRequest)
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -46,23 +65,8 @@ class MainActivity : AppCompatActivity() {
         )
 
         fab.setOnClickListener { view ->
-            ConnectionSingleton.getInstance(this).requestQueue
-
-            val url = "https://requestb.in/qqg414qq"
-
-            val stringRequest = StringRequest(Request.Method.GET, url,
-                    object : Response.Listener<String> {
-                        override fun onResponse(response: String) {
-                            Log.d("Connection","Success")
-                        }
-                    },
-                    object : Response.ErrorListener {
-                        override fun onErrorResponse(error: VolleyError) {
-                            Log.d("Connection","Error")
-                        }
-                    })
-
-            ConnectionSingleton.getInstance(this).addToRequestQueue(stringRequest)
+            val newFragment = AddRuleDialog()
+            newFragment.show(this.fragmentManager,"sth345")
         }
     }
 
